@@ -68,10 +68,24 @@ const ChatWindow = ({ chatState, suggestions }: ChatWindowPropsType) => {
         <>
           {!isMobile && (
             <div className="space-y-4 py-4">
-              <marquee direction="right">
-                {" "}
-                <span className="text-[#92909599] text-[18px]">Connectors</span>
-              </marquee>
+              <div
+                style={{
+                  overflow: "hidden",
+                  whiteSpace: "nowrap",
+                  width: "100%",
+                }}
+              >
+                <div
+                  style={{
+                    display: "inline-block",
+                    animation: "scroll 10s linear infinite",
+                  }}
+                >
+                  <span className="text-[#92909599] text-[18px]">
+                    Connectors
+                  </span>
+                </div>
+              </div>
               <div className="flex items-center flex-wrap gap-4">
                 {connectors.map((connector) => {
                   return (
