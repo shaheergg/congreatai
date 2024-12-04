@@ -3,7 +3,6 @@ import SuggestionsList from "@/components/suggestion-list";
 import CongreatPlatform from "@/components/congreat-platform";
 import Terms from "@/components/terms";
 import About from "@/components/about";
-import { Image } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import ErrorMessage from "@/components/error-message";
 import SolutionFor from "@/components/solution-for";

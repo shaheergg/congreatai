@@ -3,7 +3,6 @@ import HeroSection from "@/components/hero-section";
 import AppLayout from "@/layouts/app-layout";
 import useChatStateStore from "@/store/chatState";
 import ChatWindow from "@/components/chat-window";
-import SlashInput from "@/components/slash-input";
 
 const Chat = () => {
   const suggestions = [
