@@ -112,3 +112,59 @@ With Congreat, you can track progress in real time, manage tasks, and ensure you
 ### Private Builders
 Congreat simplifies project management, offering tools to control costs, stay organized, and deliver quality results on time.
 `;
+
+export const APARTMENT_DETAILS = `## 3 updates were made:
+
+#### Updates:
+1. **Living Room Expansion**: Increased area by 5 square meters.
+2. **Kitchen Layout Adjustment**: Added island counter (2x1 meters).
+3. **Master Bedroom Upgrade**: Added en-suite bathroom (3x2 meters).
+
+## Tasks:
+- Relocate wall.
+- Adjust electrical and lighting layout.
+- Update plumbing points.
+- Update electrical points.
+- Adjust plumbing.
+- Adjust ventilation.
+- Update tiling specifications.
+`;
+
+export const PROJECT_STATUS = `
+#### Timeline:
+- **Estimated Completion Date:** April 2025  
+- **Expected Milestone Next Quarter:** Start of exterior cladding and window installations.  
+
+#### Budget Status:
+- **Total Budget:** $250 million  
+- **Spent to Date:** $85 million  
+- **Remaining Budget:** $165 million  
+- **Cost Variance:** On track, no significant cost overruns.  
+
+#### Challenges:
+- Minor delays in material delivery due to global supply chain disruptions.  
+- Ongoing coordination with subcontractors for electrical systems installation.  
+`;
+
+export const TASKS = `
+## 5 open tasks today:
+
+*Complete structural framework for floors 25-30*
+*Install HVAC systems on floors 15-20*
+*Finalize plumbing rough-ins for floors 10-15*
+*Prepare materials for exterior cladding on floors 10-20*
+*Inspect foundation waterproofing for compliance*
+`;
+
+export const suggestions = [
+  { id: 1, name: "About Congreat" },
+  { id: 3, name: "Congreat Platform" },
+  { id: 4, name: "Solution for" },
+  { id: 5, name: "Contact" },
+];
+
+export const menuActions = [
+  "Display Details from Apartment Plan 5",
+  "My Project Status",
+  "How many tasks are open today?",
+];

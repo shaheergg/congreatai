@@ -10,7 +10,7 @@ const ErrorMessage = () => {
       (state as { setChatState: (value: string) => void }).setChatState
   );
   return (
-    <div className="w-full h-full text-xl gap-4 p-4 rounded-md text-[#2B2E32CC] flex items-center flex-col justify-center">
+    <div className="w-full h-full text-xl gap-4 py-10 rounded-md text-[#2B2E32CC] flex items-center flex-col justify-center">
       <h2 className="max-w-lg text-center">
         It seems like you're looking for something – we’d love to understand
         your needs!”

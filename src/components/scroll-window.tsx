@@ -24,7 +24,7 @@ const ScrollWindow = ({
     <ScrollArea
       className={`${
         chatState === "none" ? "h-[74vh]" : "h-screen"
-      }  p-4 flex-col`}
+      }  p-4 flex-col !no-scrollbar`}
     >
       <div ref={scrollRef} className="w-full h-full">
         {children}

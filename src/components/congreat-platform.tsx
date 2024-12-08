@@ -13,7 +13,6 @@ With cutting-edge technology, real-time functionality, and top-tier data securit
       <div className="space-y-2">
         <h2 className="font-[700] text-[18px]">Congreat Platform</h2>
         <TypingText>{text}</TypingText>
-        <p>Explore our features!</p>
       </div>{" "}
     </div>
   );

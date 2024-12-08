@@ -19,6 +19,11 @@ import trello from "@/assets/trello.png";
 import salesforce from "@/assets/salesforce.png";
 import sap from "@/assets/sap.png";
 import builton from "@/assets/builton.png";
+import useMenuAction from "@/store/menu-action";
+import FloatingLogos from "@/components/floating-logos";
+import ApartmentDetails from "@/components/apartment-details";
+import ProjectStatus from "@/components/project-status";
+import Tasks from "@/components/tasks";
 
 type SuggestionType = {
   id: number;
@@ -33,6 +38,9 @@ type ChatWindowPropsType = {
 const ChatWindow = ({ chatState, suggestions }: ChatWindowPropsType) => {
   const isMobile = useIsMobile();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const show = useMenuAction(
+    (state: unknown) => (state as { show: boolean }).show
+  );
   const connectors: string[] = [
     autodesk,
     buildertrend,
@@ -75,30 +83,25 @@ const ChatWindow = ({ chatState, suggestions }: ChatWindowPropsType) => {
                   width: "100%",
                 }}
               >
-                <div
-                  style={{
-                    display: "inline-block",
-                    animation: "scroll 10s linear infinite",
-                  }}
-                >
+                <div>
                   <span className="text-[#92909599] text-[18px]">
                     Connectors
                   </span>
                 </div>
               </div>
-              <div className="flex items-center flex-wrap gap-4">
-                {connectors.map((connector) => {
-                  return (
-                    <div className="">
-                      <img src={connector} alt="" className="h-8" />
-                    </div>
-                  );
-                })}
-              </div>
+              <FloatingLogos connectors={connectors} />
             </div>
           )}
-          <SuggestionsList suggestions={suggestions} />
+          {!show && <SuggestionsList suggestions={suggestions} />}
         </>
+      ) : chatState === "Display Details from Apartment Plan 5" ? (
+        <div>
+          <ApartmentDetails chatState={chatState} />
+        </div>
+      ) : chatState === "My Project Status" ? (
+        <ProjectStatus chatState={chatState} />
+      ) : chatState === "How many tasks are open today?" ? (
+        <Tasks chatState={chatState} />
       ) : (
         <ErrorMessage />
       )}

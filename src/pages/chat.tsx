@@ -3,14 +3,9 @@ import HeroSection from "@/components/hero-section";
 import AppLayout from "@/layouts/app-layout";
 import useChatStateStore from "@/store/chatState";
 import ChatWindow from "@/components/chat-window";
+import { suggestions } from "@/constants";
 
 const Chat = () => {
-  const suggestions = [
-    { id: 1, name: "About Congreat" },
-    { id: 3, name: "Congreat Platform" },
-    { id: 4, name: "Solution for" },
-    { id: 5, name: "Contact" },
-  ];
   const chatState = useChatStateStore(
     (state: unknown) => (state as { chatState: string }).chatState
   );

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 export const useTypingEffect = (
   text: string,
   duration: number,
-  isTypeByLetter = false
+  isTypeByLetter = true
 ) => {
   const [currentPosition, setCurrentPosition] = useState(0);
   const items = isTypeByLetter ? text.split("") : text.split(" ");

@@ -4,6 +4,7 @@ import Markdown from "react-markdown";
 import ChatBubble from "@/components/chat-bubble";
 import useChatStateStore from "@/store/chatState";
 import CongreatIcon from "@/assets/congreat-icon.png";
+import { menuActions } from "@/constants";
 
 type SourceType = {
   count: string;
@@ -28,8 +29,10 @@ const TypingText = ({ children }: { children: string }) => {
       count: "11",
     },
   ];
-
-  const TIME_PER_LETTER = 2;
+  const chatState = useChatStateStore(
+    (state: unknown) => (state as { chatState: string }).chatState
+  );
+  const TIME_PER_LETTER = 10;
   const [showTypingEffect, setShowTypingEffect] = useState(false);
   const { text, done } = useTypingEffect(
     children,
@@ -52,13 +55,12 @@ const TypingText = ({ children }: { children: string }) => {
   const enhancedText = done ? text : `${text} \`..\``;
 
   useEffect(() => {
-    if (done) {
+    if (done && menuActions.includes(chatState)) {
       setSources(sources);
     } else {
       setSources([]);
     }
   }, [done]);
-
   return (
     <div className="flex items-center gap-2 flex-initial">
       {/* Blue circle at the front */}
@@ -87,6 +89,21 @@ const TypingText = ({ children }: { children: string }) => {
                       />
                       <span>{children}</span>
                     </span>
+                  );
+                },
+                ul: ({ children }) => {
+                  return (
+                    <ul className="list-disc list-inside ml-4">{children}</ul>
+                  );
+                },
+                em: ({ children }) => {
+                  return (
+                    <div className="py-2">
+                      <div className="flex items-center gap-2">
+                        <input className="h-4 w-4" type="checkbox" />
+                        <span>{children}</span>
+                      </div>
+                    </div>
                   );
                 },
                 code: () => {

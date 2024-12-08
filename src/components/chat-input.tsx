@@ -7,6 +7,9 @@ import monday from "@/assets/monday.svg";
 import excel from "@/assets/excel.svg";
 import outlook from "@/assets/outlook.svg";
 import { motion } from "framer-motion";
+import useMenuAction from "@/store/menu-action";
+import { menuActions } from "@/constants";
+import ActionMenu from "@/components/action-menu";
 
 type SourceType = {
   count: string;
@@ -18,7 +21,13 @@ const ChatInput = () => {
   );
 
   const [previousValue, setPreviousValue] = useState(message);
-  const [show, setShow] = useState<boolean>(false);
+  const show = useMenuAction(
+    (state: unknown) => (state as { show: boolean }).show
+  );
+  const setShow = useMenuAction(
+    (state: unknown) => (state as { setShow: (value: boolean) => void }).setShow
+  );
+
   const sources = useChatStateStore(
     (state: unknown) =>
       (
@@ -39,11 +48,6 @@ const ChatInput = () => {
     monday,
     excel,
   };
-  const options = [
-    "Display Details from Apartment Plan 5",
-    "My Project Status",
-    "How many tasks are open today?",
-  ];
   useEffect(() => {
     setPreviousValue(message);
   }, [message]);
@@ -89,7 +93,7 @@ const ChatInput = () => {
     <div className="py-4 relative bg-white space-y-2 border-t border-x px-4 rounded-t-2xl shadow-md">
       {sources.length > 0 && (
         <>
-          <div className="flex py-2 text-sm text-[#929095] items-center gap-2">
+          <div className="flex text-sm text-[#929095] items-center gap-2">
             <TextSearch size={18} />
             <span>Source</span>
           </div>
@@ -111,7 +115,7 @@ const ChatInput = () => {
                   }}
                 >
                   <motion.span
-                    className="h-5 absolute w-5 -top-2 -right-2 rounded-full text-xs flex items-center justify-center border"
+                    className="h-5 absolute w-5 bg-white -top-2 -right-2 rounded-full text-xs flex items-center justify-center border"
                     whileHover={{ scale: 1.2 }}
                     transition={{
                       type: "spring",
@@ -129,24 +133,21 @@ const ChatInput = () => {
         </>
       )}
       {show && (
-        <div className="p-2 absolute shadow-md space-y-2 w-full z-[99999] -top-32 rounded-[10px] border border-[#92909526] bg-[#FAFAFA]">
-          {options.map((option) => (
-            <button
-              key={option}
-              onClick={() => {
-                setMessage(option);
-                setShow(false);
-              }}
-              className="px-4 py-2 border border-[#92909526] text-[#929095CC] w-full text-sm bg-white text-left cursor-pointer rounded-md"
-            >
-              {option}
-            </button>
-          ))}
-        </div>
+        <ActionMenu
+          menuActions={menuActions}
+          setMessage={setMessage}
+          setShow={setShow}
+        />
       )}
       <div className="relative">
         <input
           onFocus={() => focus()}
+          inputMode="none"
+          onBlur={(e) => {
+            if (!e.relatedTarget?.closest(".options-menu")) {
+              setShow(false);
+            }
+          }}
           onKeyUp={(e) => {
             if (e.key === "Enter") {
               handleSubmit();
@@ -175,7 +176,8 @@ const ChatInput = () => {
               handleSubmit();
             }}
           >
-            <Search size={24} />
+            {" "}
+            <Search size={24} />{" "}
           </Button>
         </div>
       </div>
